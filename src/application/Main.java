@@ -64,14 +64,16 @@ public class Main extends Application{
 						eachVariable[5], eachVariable[6], eachVariable[7], eachVariable[8], eachVariable[9], eachVariable[10], 
 						eachVariable[11], "", "", "");
 				todos[i].setAverage(todos[i].Average(Integer.parseInt(eachVariable[6]), Integer.parseInt(eachVariable[7]), Integer.parseInt(eachVariable[8])));
-				todos[i].setFinalCal(todos[i].getAverage());
+				todos[i].setFinalCal(Integer.toString((Integer.parseInt(todos[i].getAverage())+(Integer.parseInt(eachVariable[9])+
+						Integer.parseInt(eachVariable[10])+Integer.parseInt(eachVariable[11]))/3)/2));
 			}
 			else if(eachVariable[5].equals("B")) {
 				todos[i]= new EstudiantesB(eachVariable[0], eachVariable[1], eachVariable[2], eachVariable[3], eachVariable[4], 
 						eachVariable[5], eachVariable[6], eachVariable[7], eachVariable[8], eachVariable[9], eachVariable[10], 
 						eachVariable[11], "", "", "");
 				todos[i].setProjectsAverage(todos[i].Average(eachVariable[9], eachVariable[10], eachVariable[11]));
-				todos[i].setFinalCal(todos[i].getProjectsAverage());
+				todos[i].setFinalCal(Integer.toString((Integer.parseInt(todos[i].getProjectsAverage())+(Integer.parseInt(eachVariable[6])+ Integer.parseInt(eachVariable[7])+
+						Integer.parseInt(eachVariable[8]))/3)/2 ));
 			}x=0; z=0; y=0;
 		}
 		Students.getColumns().addAll(projectAverage, Average, finalC); 
@@ -202,7 +204,7 @@ public class Main extends Application{
 		VBox.setMargin(file, new Insets(10, 10 , 10, 10));
 		VBox.setMargin(enter, new Insets(10, 10 , 0, 10));
 		scene= new Scene(root,  1470, 600 );
-		mainWindow.setTitle("Assigment #1");
+		mainWindow.setTitle("Assigment");
 		mainWindow.setScene(scene);
 		mainWindow.show(); 
 	}
