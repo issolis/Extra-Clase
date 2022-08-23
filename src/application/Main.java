@@ -40,8 +40,45 @@ public class Main extends Application{
 	private Scene scene; 
 
 
+	public void separetion(String info[]) {
+		eachVariable= new String[15]; 
+		int x=0; int y=0; int z=0; 
+		Estudiantes todos[]=new Estudiantes[info.length];
+		for (int i=0; i<info.length; i++)
+		{
+			for (int j=0; j<info[i].length(); j++) {
+
+				if (info[i].charAt(y)==';'){
+
+					eachVariable[z]=info[i].substring(x, j); 
+					x=j+1; 
+					z++;
+				}
+				if (j==info[i].length()-1) {
+					eachVariable[z]=info[i].substring(x); 
+				}
+				y++; 
+			}
+			if( eachVariable[5].equals("A")){
+				todos[i]= new EstudiantesA(eachVariable[0], eachVariable[1], eachVariable[2], eachVariable[3], eachVariable[4], 
+						eachVariable[5], eachVariable[6], eachVariable[7], eachVariable[8], eachVariable[9], eachVariable[10], 
+						eachVariable[11], "", "", "");
+				todos[i].setAverage(todos[i].Average(Integer.parseInt(eachVariable[6]), Integer.parseInt(eachVariable[7]), Integer.parseInt(eachVariable[8])));
+				todos[i].setFinalCal(todos[i].getAverage());
+			}
+			else if(eachVariable[5].equals("B")) {
+				todos[i]= new EstudiantesB(eachVariable[0], eachVariable[1], eachVariable[2], eachVariable[3], eachVariable[4], 
+						eachVariable[5], eachVariable[6], eachVariable[7], eachVariable[8], eachVariable[9], eachVariable[10], 
+						eachVariable[11], "", "", "");
+				todos[i].setProjectsAverage(todos[i].Average(eachVariable[9], eachVariable[10], eachVariable[11]));
+				todos[i].setFinalCal(todos[i].getProjectsAverage());
+			}x=0; z=0; y=0;
+		}
+		Students.getColumns().addAll(projectAverage, Average, finalC); 
+		infom=FXCollections.observableArrayList(todos); 
+		estudiantes.setItems(infom);
 	
-	
+	}
 	public void Filereader(String name)
 	{
 
@@ -68,7 +105,7 @@ public class Main extends Application{
 		}catch(Exception error){
 
 		}
-		
+		separetion(infor); 
 	}
 	@Override 
 	public void start(Stage mainWindow) {
