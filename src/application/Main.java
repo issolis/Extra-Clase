@@ -1,6 +1,8 @@
 package application;
 
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
@@ -32,6 +35,9 @@ public class Main extends Application{
 		
 		enter.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
+				FileChooser fc= new FileChooser(); 
+				File file= fc.showOpenDialog(mainWindow); 
+				System.out.print(file);
 				
 			}
 		}); 
