@@ -1,7 +1,9 @@
 package application;
 
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
@@ -26,12 +28,48 @@ import javafx.stage.Stage;
 import javafx.collections.ObservableList;
 
 
-public class Main extends Application{
-	@Override 
-	public void init() {
+public class Main extends Application{ 
+	private String eachVariable[]; 
+	private  String infor[];
+	private ObservableList<Estudiantes> infom; 
+	private TableView<Estudiantes> estudiantes= new TableView();
+	private TableColumn<Estudiantes, String> finalC; 
+	private TableColumn<Estudiantes, String> Average; 
+	private TableColumn<Estudiantes, String> projectAverage; 
+	private TableColumn Students; 
+	private Scene scene; 
 
+
+	
+	
+	public void Filereader(String name)
+	{
+
+		try {
+			String line;
+			BufferedReader reader1 = new BufferedReader(new FileReader(name));
+			int x=-1; String line1="";
+			while(line1!=null) {
+				x++; 
+				line1=reader1.readLine();
+			}
+			reader1.close();
+			BufferedReader reader = new BufferedReader(new FileReader(name));
+			infor= new String[x-1]; x=0;
+			line= reader.readLine(); line= reader.readLine();
+			while(line!=null) {
+
+				infor[x]=line; x++;
+				line=reader.readLine();
+			}
+			reader.close(); 
+			line=null; 
+
+		}catch(Exception error){
+
+		}
+		
 	}
-
 	@Override 
 	public void start(Stage mainWindow) {
 
@@ -41,53 +79,82 @@ public class Main extends Application{
 		file.setFont(new Font(15)); 
 		Button enter= new Button("Search file");
 
-		TableView<Estudiantes> estudiantes= new TableView(); 
-		estudiantes.setMinSize(500, 500); 
-		Estudiantes e1= new Estudiantes(null, null, null, null, null, null, null, null, null, null, null, null); 
+		estudiantes.setMinSize(1450, 600); 
 
-		Estudiantes todos[]= new Estudiantes[1]; 
-		todos [0]=e1;
-
-		final ObservableList<Estudiantes> info= FXCollections.observableArrayList( todos
-				);
-
-
-
-
-
-
-		TableColumn Students= new TableColumn ("Students");
-
-
+		Students= new TableColumn ("Students");
 
 		TableColumn<Estudiantes, String> Carne= new TableColumn<>("Carne"); 
 		Carne.setCellValueFactory(new PropertyValueFactory<Estudiantes, String>("Carne"));
-		Carne.setMinWidth( estudiantes.getMinWidth()/2);
+		Carne.setMinWidth( estudiantes.getMinWidth()/15);
 
 		TableColumn<Estudiantes, String> name= new TableColumn<>("Name"); 
 		name.setCellValueFactory(new PropertyValueFactory<Estudiantes, String>("name"));
-		name.setMinWidth( estudiantes.getMinWidth()/2);
+		name.setMinWidth( estudiantes.getMinWidth()/15);
+
+		TableColumn<Estudiantes, String> lastname= new TableColumn<>("Lastname"); 
+		lastname.setCellValueFactory(new PropertyValueFactory<Estudiantes, String>("second"));
+		lastname.setMinWidth( estudiantes.getMinWidth()/15);
+
+		TableColumn<Estudiantes, String> email= new TableColumn<>("Email"); 
+		email.setCellValueFactory(new PropertyValueFactory<Estudiantes, String>("email"));
+		email.setMinWidth( estudiantes.getMinWidth()/15);
+
+		TableColumn<Estudiantes, String> phone= new TableColumn<>("Phone"); 
+		phone.setCellValueFactory(new PropertyValueFactory<Estudiantes, String>("phone"));
+		phone.setMinWidth( estudiantes.getMinWidth()/15);
 
 
+		TableColumn<Estudiantes, String> kind= new TableColumn<>("Type"); 
+		kind.setCellValueFactory(new PropertyValueFactory<Estudiantes, String>("KindStudent"));
+		kind.setMinWidth( estudiantes.getMinWidth()/15);
 
-		estudiantes.setItems(info); 
-		Students.getColumns().addAll(Carne, name); 
+		TableColumn<Estudiantes, String> exams= new TableColumn<>("Exam Average"); 
+		exams.setCellValueFactory(new PropertyValueFactory<Estudiantes, String>("ExamsAverage"));
+		exams.setMinWidth( estudiantes.getMinWidth()/15);
+
+		TableColumn<Estudiantes, String> quiz= new TableColumn<>("Quiz Average"); 
+		quiz.setCellValueFactory(new PropertyValueFactory<Estudiantes, String>("QuizAverage"));
+		quiz.setMinWidth( estudiantes.getMinWidth()/12);
+
+		TableColumn<Estudiantes, String> assigment= new TableColumn<>("Assigment Average"); 
+		assigment.setCellValueFactory(new PropertyValueFactory<Estudiantes, String>("AssigmentsAverage"));
+		assigment.setMinWidth( estudiantes.getMinWidth()/15);
+
+		TableColumn<Estudiantes, String> project1= new TableColumn<>("Project #1"); 
+		project1.setCellValueFactory(new PropertyValueFactory<Estudiantes, String>("project1"));
+		project1.setMinWidth( estudiantes.getMinWidth()/15);
+
+		TableColumn<Estudiantes, String> project2= new TableColumn<>("Project #2"); 
+		project2.setCellValueFactory(new PropertyValueFactory<Estudiantes, String>("project2"));
+		project2.setMinWidth( estudiantes.getMinWidth()/15);
+
+		TableColumn<Estudiantes, String> project3= new TableColumn<>("Project #3"); 
+		project3.setCellValueFactory(new PropertyValueFactory<Estudiantes, String>("project3"));
+		project3.setMinWidth( estudiantes.getMinWidth()/15);
+
+		projectAverage= new TableColumn<>("Project Average"); 
+		projectAverage.setCellValueFactory(new PropertyValueFactory<Estudiantes, String>("projectsAverage"));
+		projectAverage.setMinWidth( estudiantes.getMinWidth()/15);
+
+		Average= new TableColumn<>("Average (E,Q,A"); 
+		Average.setCellValueFactory(new PropertyValueFactory<Estudiantes, String>("Average"));
+		Average.setMinWidth( estudiantes.getMinWidth()/15);
+
+		finalC= new TableColumn<>("Final Calification"); 
+		finalC.setCellValueFactory(new PropertyValueFactory<Estudiantes, String>("finalCal"));
+		finalC.setMinWidth( estudiantes.getMinWidth()/15);
+
+		estudiantes.setItems(infom); 
+
+		Students.getColumns().addAll(Carne, name, lastname, email, phone, kind, exams, quiz, assigment, project1, project2, project3); 
 		estudiantes.getColumns().add(Students);
-
-
-
-
-
-
-
-
 
 
 		enter.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				FileChooser fc= new FileChooser(); 
 				File file= fc.showOpenDialog(mainWindow); 
-				System.out.print(file);
+				Filereader(file.toString()); 
 
 			}
 		}); 
@@ -97,126 +164,16 @@ public class Main extends Application{
 
 		VBox.setMargin(file, new Insets(10, 10 , 10, 10));
 		VBox.setMargin(enter, new Insets(10, 10 , 0, 10));
-		Scene scene= new Scene(root, 400, 400 );
-		mainWindow.setTitle("Notas de Estudiantes");
+		scene= new Scene(root,  1470, 600 );
+		mainWindow.setTitle("Assigment #1");
 		mainWindow.setScene(scene);
 		mainWindow.show(); 
-
-
-
-	}
-	@Override 
-	public void stop() {
-
 	}
 	public static void main (String args[]) {
 		launch(args); 
 
 	}
-	public static class Estudiantes{
-		private final SimpleStringProperty Carne; 
-		private final SimpleStringProperty name; 
-		private final SimpleStringProperty lastname;
-		private final SimpleStringProperty email; 
-		private final SimpleStringProperty phone; 
-		private final SimpleStringProperty KindStudent; 
-		private final SimpleStringProperty ExamsAverage; 
-		private final SimpleStringProperty QuizAverage; 
-		private final SimpleStringProperty AssigmentsAverage;
-		private final SimpleStringProperty project1; 
-		private final SimpleStringProperty project2; 
-		private final SimpleStringProperty project3;
 
-		private Estudiantes (String Carne, String name, String lastname, String email, String phone, 
-				String KindStudent, String ExamsAverage, String QuizAverage, String AssigmentsAverage, String project1, String project2, String project3) {
-			this.Carne= new SimpleStringProperty(Carne); 
-			this.name= new SimpleStringProperty(name);
-			this.lastname= new SimpleStringProperty(lastname);
-			this.email= new SimpleStringProperty(email);
-			this.phone= new SimpleStringProperty(phone);
-			this.KindStudent= new SimpleStringProperty(KindStudent);
-			this.ExamsAverage= new SimpleStringProperty(ExamsAverage);
-			this.QuizAverage= new SimpleStringProperty(QuizAverage);
-			this.AssigmentsAverage= new SimpleStringProperty(AssigmentsAverage);
-			this.project1= new SimpleStringProperty(project1);
-			this.project3= new SimpleStringProperty(project3);
-			this.project2= new SimpleStringProperty(project2);
-
-		}
-
-		public String getCarne() {
-			return Carne.get();
-		}
-		public void setCarne(String x) {
-			Carne.set(x);
-		}
-		public String getName() {
-			return name.get();
-		}
-		public void setName(String x) {
-			name.set(x);
-		}
-		public String getLastName() {
-			return lastname.get();
-		}
-		public void setLastname(String x) {
-			lastname.set(x);
-		}
-		public String getEmail() {
-			return email.get();
-		}
-		public void setEmail(String x) {
-			email.set(x);
-		}
-		public String getPhone() {
-			return phone.get();
-		}
-		public void setPhone(String x) {
-			phone.set(x);
-		}
-		public String getKindStudent() {
-			return KindStudent.get();
-		}
-		public void setKindStudent(String x) {
-			KindStudent.set(x);
-		}
-		public String getExamsAverage() {
-			return ExamsAverage.get();
-		}
-		public void setExamsAverage(String x) {
-			ExamsAverage.set(x);
-		}
-		public String getQuizAverage() {
-			return QuizAverage.get();
-		}
-		public void setQuizAverage(String x) {
-			QuizAverage.set(x);
-		}
-		public String getAssigmentsAverage() {
-			return AssigmentsAverage.get();
-		}
-		public void setAssigmentsAverage(String x) {
-			AssigmentsAverage.set(x);
-		}
-		public String getproject1() {
-			return project1.get();
-		}
-		public void setproject1(String x) {
-			project1.set(x);
-		}
-		public String getproject2() {
-			return project2.get();
-		}
-		public void setproject2(String x) {
-			project2.set(x);
-
-		}
-		public String getproject3() {
-			return project3.get();
-		}
-		public void setproject3(String x) {
-			project3.set(x);
-		}
-	}
 }
+
 
