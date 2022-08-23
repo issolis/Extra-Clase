@@ -4,7 +4,8 @@ package application;
  * @author isaac
  *
  */
-public class EstudiantesB extends Estudiantes{
+public class EstudiantesB extends Estudiantes{ //Este es otro ejemplo de herencia, en la que se heredó los atributos y métodos de la clase Estudiantes, 
+	                                           
 	/**
 	 * Constructor de la clase
 	 * @param Carne - Identificador de un estudiante
@@ -27,7 +28,8 @@ public class EstudiantesB extends Estudiantes{
 			String ExamsAverage, String QuizAverage, String AssigmentsAverage, String project1, String project2,
 			String project3, String projectsAverage, String Average, String finalCal) {
 		super(Carne, name, second, email, phone, KindStudent, ExamsAverage, QuizAverage, AssigmentsAverage, project1, project2,
-				project3, projectsAverage, Average, finalCal);
+				project3, projectsAverage, Average, finalCal); //La palabra reservada "protected" es otro indicativo que se usó encapsulamiento, puesto que el método
+		                                                       //tiene uso sólo para objetos que sean de la clase. 
 	}
 	/**
 	 * Calcula el promedio de proyectos 
