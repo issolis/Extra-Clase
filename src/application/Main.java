@@ -27,9 +27,19 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.collections.ObservableList;
 
-
-public class Main extends Application{ 
-	private String eachVariable[]; 
+/**
+ * Clase principal del sistema 
+ * En esta clase permite que sea desplegada la interfaz gráfica. 
+ * 
+ */
+public class Main extends Application{ //Aunque de manera aprovechada, en esta línea también se realiza herencia, en donde la superclase
+	                                   // es Application, que trae consigue todos los métodos y funciones propios de javaFx; esto se deduce
+	                                   // por la utilización de la palabra reservada "extends", no olvidar que la sintáxis es la que nos revela
+	                                   // que formas y conceptos infórmaticos se están aplicando. 
+	
+	private String eachVariable[]; //En la presente declaración de la variable con la palabra reservada "private"
+	                               //se hace conceptualmente un encapsulamiento, lo que significa, que salvo a métodos setters o getters, 
+	                               // la variable no puede ser manipulada. 
 	private  String infor[];
 	private ObservableList<Estudiantes> infom; 
 	private TableView<Estudiantes> estudiantes= new TableView();
@@ -39,11 +49,18 @@ public class Main extends Application{
 	private TableColumn Students; 
 	private Scene scene; 
 
-
+	/**
+	 * En este método se separan en variables, para los objetos de clase estudiante,
+	 * la información contenida en cadenas de texto guardadas en arreglos. 
+	 * @param info - Arreglo con distintas cadenas de texto
+	 */
 	public void separetion(String info[]) {
 		eachVariable= new String[15]; 
 		int x=0; int y=0; int z=0; 
-		Estudiantes todos[]=new Estudiantes[info.length];
+		Estudiantes todos[]=new Estudiantes[info.length]; // la instanciación es el definir objetos, justo lo que se 
+		                                                  // visualiza en la línea 60, que se define un vector de objetos,
+		                                                  // que también es un objeto, y esto bajo la clase estudiante. 
+		                                              
 		for (int i=0; i<info.length; i++)
 		{
 			for (int j=0; j<info[i].length(); j++) {
@@ -62,7 +79,12 @@ public class Main extends Application{
 			if( eachVariable[5].equals("A")){
 				todos[i]= new EstudiantesA(eachVariable[0], eachVariable[1], eachVariable[2], eachVariable[3], eachVariable[4], 
 						eachVariable[5], eachVariable[6], eachVariable[7], eachVariable[8], eachVariable[9], eachVariable[10], 
-						eachVariable[11], "", "", "");
+						eachVariable[11], "", "", ""); // Desde la línea 81, se presenta la ejemplificación del uso del poliformismo, 
+				                                       // es decir, "las distintas formas", las distintas formas en la que un objeto
+				                                       // instanciado en una súper clase, puede ser definido de formas distintas, correspondiente 
+				                                       // a las subclases de la mencionada súper clase; en este caso, la clase padre, que es Estudiantes, 
+				                                       // y la clase hija, EstudiantesA. 
+				
 				todos[i].setAverage(todos[i].Average(Integer.parseInt(eachVariable[6]), Integer.parseInt(eachVariable[7]), Integer.parseInt(eachVariable[8])));
 				todos[i].setFinalCal(Integer.toString((Integer.parseInt(todos[i].getAverage())+(Integer.parseInt(eachVariable[9])+
 						Integer.parseInt(eachVariable[10])+Integer.parseInt(eachVariable[11]))/3)/2));
@@ -79,8 +101,13 @@ public class Main extends Application{
 		Students.getColumns().addAll(projectAverage, Average, finalC); 
 		infom=FXCollections.observableArrayList(todos); 
 		estudiantes.setItems(infom);
-	
+
 	}
+	/**
+	 * Este método toma una dirección de un archivo CSV, lo abre, y guarda cada línea
+	 * de texto en un arreglo. 
+	 * @param name - Nombre del Archivo
+	 */
 	public void Filereader(String name)
 	{
 
@@ -109,6 +136,11 @@ public class Main extends Application{
 		}
 		separetion(infor); 
 	}
+	/**
+	 * Este método es el thread principal de la interfaz gráfica, en donde los componente 
+	 * básicos son iniciados, botones, etiquedas, etc. 
+	 * @param mainWindow - nombre de la ventana 
+	 */
 	@Override 
 	public void start(Stage mainWindow) {
 
@@ -208,6 +240,11 @@ public class Main extends Application{
 		mainWindow.setScene(scene);
 		mainWindow.show(); 
 	}
+	/**
+	 * Este es el método principal de la clase, en donde es llamada, a través del método launch(),
+	 * a comenzar la interfaz gráfica. 
+	 * @param args
+	 */
 	public static void main (String args[]) {
 		launch(args); 
 

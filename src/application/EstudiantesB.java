@@ -1,5 +1,9 @@
 package application;
-
+/**
+ * Esta es una clase hija de la clase estudiante, difiere en comportamiento por el tipo de estudiante
+ * @author isaac
+ *
+ */
 public class EstudiantesB extends Estudiantes{
 	/**
 	 * Constructor de la clase
